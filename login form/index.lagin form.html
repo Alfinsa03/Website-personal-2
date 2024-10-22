@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">  </head> <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> </head> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+
+</head>
+<body>
+    <div class="screen-1">
+        <img src="IMG_9839.PNG" alt="Logo" class="logo" style="max-width: 150px; display: block; margin: 0 auto; visibility: visible;">
+
+        <form id="loginForm" method="POST">
+            <div class="email">
+                <label for="username" style="margin-bottom: 0.5em; color: #000;;">Username</label>
+                <div style="display:flex; align-items: center; background: white; border-radius: 15px; padding: 0.5em; border: 1px solid #ddd;">
+                    <i class="ion-person" style="margin-right: 0.5em; color:#4d4d4d;"></i>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required style="background:transparent; border: none; flex-grow: 1;">
+                </div>
+            </div>
+
+            <div class="password">
+                <label for="password" style="margin-bottom: 0.5em; color:#000;">Password</label>
+                <div style="display:flex; align-items: center; background: white; border-radius: 15px; padding: 0.5em; border: 1px solid #ddd;">
+                    <i class="ion-lock-combination" style="margin-right: 0.5em; color:#4d4d4d;"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required style="background:transparent; border: none; flex-grow: 1;">
+                    <i class="ion-eye show-hide"></i>
+                </div>
+            </div>
+          
+            <button type="submit" class="login">Login</button>
+
+            <p id="errorMessage" class="error-message" style="color: red; text-align: center;"></p>
+
+        </form>
+
+        <div class="footer">
+            <span>Forgot Password?</span>
+            <span>Create Account</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
