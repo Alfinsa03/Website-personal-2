@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Sederhana</title>
+  <style>
+     body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      float: left;
+      width: calc(33.33% - 20px); /* Tiga kolom, dikurangi margin */
+    }
+
+    .box:nth-child(3n+1) {
+      clear: left; /* Untuk membuat baris baru setiap 3 box */
+    }
+
+    .box h2 {
+      margin-top: 0;
+    }
+
+
+    /* Responsif untuk layar kecil */
+    @media (max-width: 768px) {
+      .box {
+        width: calc(50% - 20px); /* Dua kolom */
+      }
+
+      .box:nth-child(3n+1) {
+        clear: none;
+      }
+      .box:nth-child(2n+1) {
+        clear: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        width: 100%; /* Satu kolom */
+        margin-bottom: 20px;
+      }
+    }
+
+    canvas {
+      width: 100%;
+      height: 200px;
+      max-width: 400px; /* Batasi lebar maksimum canvas */
+      margin: 0 auto; /* Pusatkan canvas */
+      display: block; /* Perbaiki masalah spasi di bawah canvas */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Dashboard</h1>
+    </div>
+
+    <div class="box">
+      <h2>Pengguna</h2>
+      <canvas id="userChart"></canvas> <p>Total pengguna: <span id="totalUsers">0</span></p>
+    </div>
+
+    <div class="box">
+      <h2>Penjualan</h2>
+      <canvas id="salesChart"></canvas>
+      <p>Total penjualan: Rp <span id="totalSales">0</span></p>
+    </div>
+
+    <div class="box">
+      <h2>Produk</h2>
+      <canvas id="productChart"></canvas>
+      <p>Total produk: <span id="totalProducts">0</span></p>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Data dummy (ganti dengan data asli)
+  const userData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      data: [120, 190, 30, 50, 20, 30]
+  };
+  const salesData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+      data: [5000000, 7000000, 3000000, 8000000, 2000000, 4000000]
+  };
+  const productData = {
+      labels: ['Kategori A', 'Kategori B', 'Kategori C'],
+      data: [20, 15, 5]
+  };
+
+
+  // Fungsi untuk membuat chart
+  function createChart(canvasId, chartType, data, label) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    return new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels: data.labels,
+        datasets: [{
+          label: label,
+          data: data.data,
+          backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+          borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+    });
+  }
+
+
+  // Membuat chart
+  createChart('userChart', 'bar', userData, 'Jumlah Pengguna');
+  createChart('salesChart', 'line', salesData, 'Penjualan');
+  createChart('productChart', 'pie', productData, 'Produk');
+
+
+    // Menampilkan total data
+    document.getElementById('totalUsers').textContent = userData.data.reduce((a, b) => a + b, 0);
+    document.getElementById('totalSales').textContent = salesData.data.reduce((a, b) => a + b, 0).toLocaleString();
+    document.getElementById('totalProducts').textContent = productData.data.reduce((a, b) => a + b, 0);
+
+
+
+
+</script>
+
+</body>
+</html>
